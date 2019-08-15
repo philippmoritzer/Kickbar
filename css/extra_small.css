@@ -1,4 +1,12 @@
 /* Extra small devices (phones, up to 480px) */
 /* Test device - Any smartphone */
 @media screen and (max-width: 767px) {
+  html,
+  body {
+    overflow: scroll;
+  }
+  .impress-flex {
+    display: flex;
+    flex-direction: column;
+  }
 }

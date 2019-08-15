@@ -1,0 +1,80 @@
+@font-face {
+  font-family: "FiraSans-Black";
+  src: url(../assets/fonts/FiraSans-Black.ttf);
+}
+
+@font-face {
+  font-family: "FiraSans-Book";
+  src: url(../assets/fonts/FiraSans-Book.otf);
+}
+
+@font-face {
+  font-family: "FiraSans-BlackItalic";
+  src: url(../assets/fonts/FiraSans-BlackItalic.ttf);
+}
+@font-face {
+  font-family: "FiraSans-Bold.ttf";
+  src: url(../assets/fonts/FiraSans-Bold.ttf);
+}
+@font-face {
+  font-family: "FiraSans-BoldItalic";
+  src: url(../assets/fonts/FiraSans-BoldItalic.ttf);
+}
+@font-face {
+  font-family: "FiraSans-ExtraBold";
+  src: url(../assets/fonts/FiraSans-ExtraBold.ttf);
+}
+@font-face {
+  font-family: "FiraSans-ExtraBoldItalic";
+  src: url(../assets/fonts/FiraSans-ExtraBoldItalic.ttf);
+}
+
+@font-face {
+  font-family: "FiraSans-ExtraLight";
+  src: url(../assets/fonts/FiraSans-ExtraLight.ttf);
+}
+@font-face {
+  font-family: "FiraSans-ExtraLightItalic";
+  src: url(../assets/fonts/FiraSans-ExtraLightItalic.ttf);
+}
+@font-face {
+  font-family: "FiraSans-Light";
+  src: url(../assets/fonts/FiraSans-Light.ttf);
+}
+@font-face {
+  font-family: "FiraSans-LightItalic";
+  src: url(../assets/fonts/FiraSans-LightItalic.ttf);
+}
+@font-face {
+  font-family: "FiraSans-Medium";
+  src: url(../assets/fonts/FiraSans-Medium.ttf);
+}
+@font-face {
+  font-family: "FiraSans-MediumItalic";
+  src: url(../assets/fonts/FiraSans-MediumItalic.ttf);
+}
+@font-face {
+  font-family: "FiraSans-Regular";
+  src: url(../assets/fonts/FiraSans-Regular.ttf);
+}
+@font-face {
+  font-family: "FiraSans-RegularItalic";
+  src: url(../assets/fonts/FiraSans-RegularItalic.ttf);
+}
+@font-face {
+  font-family: "FiraSans-SemiBold";
+  src: url(../assets/fonts/FiraSans-SemiBold.ttf);
+}
+@font-face {
+  font-family: "FiraSans-SemiBoldItalic";
+  src: url(../assets/fonts/FiraSans-SemiBoldItalic.ttf);
+}
+@font-face {
+  font-family: "FiraSans-Thin";
+  src: url(../assets/fonts/FiraSans-Thin.ttf);
+}
+
+@font-face {
+  font-family: "FiraSans-ThinItalic";
+  src: url(../assets/fonts/FiraSans-ThinItalic.ttf);
+}

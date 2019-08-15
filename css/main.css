@@ -11,7 +11,15 @@ body {
 }
 
 .section-container {
-  height: 50vh;
+  max-height: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.5s ease-out;
+}
+
+.active {
+  max-height: 58vh;
+  height: 58vh;
 }
 
 .clickable {
@@ -21,4 +29,51 @@ body {
 .inactive {
   opacity: 0.2;
   filter: alpha(opacity=20);
+}
+
+.impress-right-side {
+  text-align: justify;
+}
+
+.impress-left-side {
+}
+
+.impress-description-text {
+  font-family: "FiraSans-Book";
+  color: #bdbbac;
+  margin-block-start: -0.1em;
+  letter-spacing: 1px;
+}
+
+.impress-trick-header {
+  font-family: "FiraSans-Medium";
+  color: #bdbbac;
+  font-size: 1.5em;
+}
+.impress-rating-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.impress-rating-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  float: left;
+}
+
+.impress-rating-category {
+  font-family: "FiraSans-Regular";
+  color: #bdbbac;
+  font-size: 20pt;
+}
+
+.impress-rating-star {
+  width: 16px;
+  height: 16px;
+}
+.video-preview {
+  max-height: 100%;
+  max-width: 100%;
 }
