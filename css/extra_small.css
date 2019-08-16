@@ -9,4 +9,13 @@
     display: flex;
     flex-direction: column;
   }
+
+  .practice-flex {
+    display: flex;
+    flex-direction: column;
+  }
+  .learn-flex {
+    display: flex;
+    flex-direction: column;
+  }
 }

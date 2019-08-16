@@ -29,6 +29,7 @@ body {
 .inactive {
   opacity: 0.2;
   filter: alpha(opacity=20);
+  transition: all 0.5s ease;
 }
 
 .impress-right-side {
@@ -58,22 +59,113 @@ body {
 .impress-rating-row {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  float: left;
 }
 
 .impress-rating-category {
   font-family: "FiraSans-Regular";
   color: #bdbbac;
-  font-size: 20pt;
+  font-size: 16pt;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
 }
 
 .impress-rating-star {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
+
+.shuffle-image {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
 .video-preview {
   max-height: 100%;
   max-width: 100%;
+}
+
+.practice-flex {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1.5em;
+}
+
+.practice-left-side {
+  text-align: justify;
+}
+
+.section-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-head-text {
+  font-family: "FiraSans-SemiBold";
+  color: #bdbbac;
+  font-size: 16pt;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+
+.section-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-item-text {
+  font-family: "FiraSans-Regular";
+  color: #bdbbac;
+  letter-spacing: 1px;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.section-item-sets {
+  font-family: "FiraSans-Regular";
+  color: #bdbbac;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.section-item-info {
+  font-family: "FiraSans-LightItalic";
+  color: #bdbbac;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.learn-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.learn-description-text {
+  font-family: "FiraSans-Book";
+  color: #bdbbac;
+  margin-block-start: -0.1em;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+
+.small-header {
+  font-size: 14pt;
+}
+
+.learn-two-images {
+  display: flex;
+  flex-direction: row;
+}
+
+.split-image {
+  max-height: 50%;
+  max-width: 50%;
 }

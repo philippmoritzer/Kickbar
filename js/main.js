@@ -24,14 +24,17 @@ function loadContent() {
 }
 
 $(document).ready(function() {
-  $impress_section.on("click", () => {
+  $("#impress-menu").on("click", () => {
     activateSection($("#impress-content-container"), 0);
+    $("#impress-menu").removeClass("inactive");
   });
-  $practice_section.on("click", () => {
+  $("#practice-menu").on("click", () => {
     activateSection($("#practice-content-container"), 0);
+    $("#practice-menu").removeClass("inactive");
   });
-  $learn_section.on("click", () => {
+  $("#learn-menu").on("click", () => {
     activateSection($("#learn-content-container"), 0);
+    $("#learn-menu").removeClass("inactive");
   });
   $("#logo-image").on("click", () => {
     removeAllActiveSections();
@@ -46,17 +49,27 @@ function activateSection(element, index) {
     element.addClass("active");
     setActiveState(index);
   }
+  setInactive();
 }
 
 function removeAllActiveSections() {
   $("#impress-content-container").removeClass("active");
   $("#practice-content-container").removeClass("active");
   $("#learn-content-container").removeClass("active");
+  $("#impress-menu").removeClass("inactive");
+  $("#practice-menu").removeClass("inactive");
+  $("#learn-menu").removeClass("inactive");
+}
+
+function setInactive() {
+  $("#impress-menu").addClass("inactive");
+  $("#practice-menu").addClass("inactive");
+  $("#learn-menu").addClass("inactive");
 }
 
 function setActiveState(section) {
-  for (let aState of activeState) {
-    aState = false;
+  for (let i = 0; i < activeState.length - 1; i++) {
+    activeState[i] = false;
   }
   activeState[section] = true;
 }
