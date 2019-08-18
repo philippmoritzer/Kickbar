@@ -3,19 +3,38 @@
 @media screen and (max-width: 767px) {
   html,
   body {
-    overflow: scroll;
+    position: fixed;
+
+    overflow: hidden;
   }
   .impress-flex {
     display: flex;
     flex-direction: column;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 
   .practice-flex {
     display: flex;
     flex-direction: column;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
   .learn-flex {
     display: flex;
     flex-direction: column;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  section {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .section-container {
+    overflow-y: scroll;
+
+    width: 85%;
+    margin: 0 auto;
   }
 }

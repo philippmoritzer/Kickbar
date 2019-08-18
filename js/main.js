@@ -20,6 +20,9 @@ function loadContent() {
     $.get("html/learn.html", function(data) {
       $learn_section.append(data);
     });
+    $.get("html/scroll-overlay.html", function(data) {
+      $("#main-container").append(data);
+    });
   });
 }
 
@@ -73,3 +76,57 @@ function setActiveState(section) {
   }
   activeState[section] = true;
 }
+
+$(document).ready(function() {
+  var timerId;
+  $(window).on("wheel", function(e) {
+    var delta = e.originalEvent.deltaY;
+    clearTimeout(timerId);
+    timerId = setTimeout(function() {
+      if (delta > 1) {
+        navigateDown();
+      } else {
+        navigateUp();
+      }
+    }, 200);
+  });
+});
+
+//swipe
+$(document).ready(function() {
+  var container = document.getElementById("main-container");
+  var hammer = new Hammer.Manager(container, { touchAction: "auto" });
+  var swipe = new Hammer.Swipe();
+  hammer.add(swipe);
+  hammer.on("swipedown", function() {
+    navigateUp();
+  });
+  hammer.on("swipeup", function() {
+    navigateDown();
+  });
+});
+
+//swip impress container
+// $(document).ready(function() {
+//   var container = document.getElementById("main-container");
+//   var hammer = new Hammer.Manager(container, { touchAction: "auto" });
+//   var swipe = new Hammer.Swipe();
+//   hammer.add(swipe);
+
+//   hammer.on("", function() {
+//     navigateUp();
+//   });
+//   hammer.on("swipeup", function() {
+//     console.log("yup");
+//     navigateDown();
+//   });
+// });
+
+function navigateDown() {
+  $("#scroll-overlay").css("opacity", 0);
+  setTimeout(function() {
+    $("#scroll-overlay").css("display", "none");
+  }, 500);
+}
+
+function navigateUp() {}

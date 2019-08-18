@@ -1,6 +1,14 @@
 /* Small devices (tablets, 768px and up) */
 /* Test device - iPad */
 @media (min-width: 768px) and (max-width: 991px) {
+  .section-wrapper {
+    width: 75%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .impress-flex {
     display: flex;
     flex-direction: column;
@@ -12,5 +20,12 @@
   .learn-flex {
     display: flex;
     flex-direction: column;
+  }
+  .video-preview {
+    width: 100%;
+  }
+
+  .section-container {
+    overflow-y: scroll;
   }
 }
