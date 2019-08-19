@@ -22,6 +22,9 @@ function loadContent() {
     });
     $.get("html/scroll-overlay.html", function(data) {
       $("#main-container").append(data);
+      setTimeout(function() {
+        $("#scroll-overlay").css("opacity", 0.9);
+      }, 100);
     });
   });
 }
@@ -32,11 +35,12 @@ $(document).ready(function() {
     $("#impress-menu").removeClass("inactive");
   });
   $("#practice-menu").on("click", () => {
-    activateSection($("#practice-content-container"), 0);
+    activateSection($("#practice-content-container"), 1);
     $("#practice-menu").removeClass("inactive");
   });
   $("#learn-menu").on("click", () => {
-    activateSection($("#learn-content-container"), 0);
+    activateSection($("#learn-content-container"), 2);
+
     $("#learn-menu").removeClass("inactive");
   });
   $("#logo-image").on("click", () => {
@@ -50,6 +54,7 @@ function activateSection(element, index) {
     activeState[index] = false;
   } else {
     element.addClass("active");
+
     setActiveState(index);
   }
   setInactive();
@@ -122,11 +127,60 @@ $(document).ready(function() {
 //   });
 // });
 
+var index = 0;
+
 function navigateDown() {
-  $("#scroll-overlay").css("opacity", 0);
-  setTimeout(function() {
-    $("#scroll-overlay").css("display", "none");
-  }, 500);
+  switch (index) {
+    case 0:
+      $("#scroll-overlay").css("opacity", 0);
+      setTimeout(function() {
+        $("#scroll-overlay").css("display", "none");
+      }, 500);
+      index = 1;
+      break;
+    case 1:
+      activateSection($("#impress-content-container"), 0);
+      $("#impress-menu").removeClass("inactive");
+      index = 2;
+      break;
+    case 2:
+      $.get("html/vertical-scroll-overlay.html", function(data) {
+        $("#main-container").append(data);
+        setTimeout(function() {
+          $("#vertical-scroll-overlay").css("opacity", 0.9);
+        }, 100);
+      });
+      index = 3;
+      break;
+    case 3:
+      $("#vertical-scroll-overlay").css("opacity", 0);
+      setTimeout(function() {
+        $("#vertical-scroll-overlay").css("display", "none");
+      }, 500);
+
+      index = 4;
+      break;
+    case 4:
+      activateSection($("#practice-content-container"), 0);
+      $("#practice-menu").removeClass("inactive");
+      index = 5;
+      break;
+    case 5:
+      activateSection($("#practice-content-container"), 0);
+      $("#practice-menu").removeClass("inactive");
+      index = 6;
+      break;
+    case 6:
+      activateSection($("#learn-content-container"), 0);
+      $("#learn-menu").removeClass("inactive");
+      index = 7;
+      break;
+    case 7:
+      activateSection($("#learn-content-container"), 0);
+      $("#learn-menu").removeClass("inactive");
+      index = 8;
+      break;
+  }
 }
 
 function navigateUp() {}

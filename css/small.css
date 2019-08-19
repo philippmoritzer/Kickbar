@@ -1,6 +1,10 @@
 /* Small devices (tablets, 768px and up) */
 /* Test device - iPad */
 @media (min-width: 768px) and (max-width: 991px) {
+  html,
+  body {
+  }
+
   .section-wrapper {
     width: 75%;
     height: auto;
@@ -23,6 +27,10 @@
   }
   .video-preview {
     width: 100%;
+  }
+
+  section {
+    -webkit-overflow-scrolling: touch;
   }
 
   .section-container {

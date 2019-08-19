@@ -5,6 +5,14 @@ body {
   overflow: hidden;
 }
 
+#impress {
+  transition: all 2s ease-in-out;
+}
+
+#practice {
+  transition: all 2s ease-in-out;
+}
+
 .scroll-overlay {
   position: absolute;
   width: 100%;
@@ -12,8 +20,29 @@ body {
   top: 0;
   left: 0;
   background-color: black;
-  opacity: 0.9;
-  transition: all 0.5s ease-out;
+  opacity: 0;
+  transition: all 0.5s ease-in;
+}
+
+.scroll-overlay-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.scroll-overlay-flex-vertical {
+}
+
+.scroll-overlay-fade-bottom {
+  width: 100%;
+
+  height: 5vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0),
+    rgba(245, 242, 208)
+  );
 }
 
 .container {
@@ -184,4 +213,13 @@ body {
 .split-image {
   max-height: 50%;
   max-width: 50%;
+}
+
+.scroll-overlay-button {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
 }
