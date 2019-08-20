@@ -33,15 +33,17 @@ $(document).ready(function() {
   $("#impress-menu").on("click", () => {
     activateSection($("#impress-content-container"), 0);
     $("#impress-menu").removeClass("inactive");
+    index = 3;
   });
   $("#practice-menu").on("click", () => {
     activateSection($("#practice-content-container"), 1);
     $("#practice-menu").removeClass("inactive");
+    index = 7;
   });
   $("#learn-menu").on("click", () => {
     activateSection($("#learn-content-container"), 2);
-
     $("#learn-menu").removeClass("inactive");
+    index = 8;
   });
   $("#logo-image").on("click", () => {
     removeAllActiveSections();
@@ -128,20 +130,34 @@ $(document).ready(function() {
 // });
 
 var index = 0;
+var skip = false;
+var skipIntro = false;
 
 function navigateDown() {
   switch (index) {
     case 0:
-      $("#scroll-overlay").css("opacity", 0);
-      setTimeout(function() {
-        $("#scroll-overlay").css("display", "none");
-      }, 500);
       index = 1;
+      if (!skipIntro) {
+        $("#scroll-overlay").css("opacity", 0);
+        setTimeout(function() {
+          $("#scroll-overlay").css("display", "none");
+        }, 500);
+        skipIntro = true;
+      } else {
+        setInactive();
+        $("#impress-menu").removeClass("inactive");
+      }
+
       break;
     case 1:
       activateSection($("#impress-content-container"), 0);
       $("#impress-menu").removeClass("inactive");
-      index = 2;
+      console.log(skip);
+      if (!skip) {
+        index = 2;
+      } else {
+        index = 5;
+      }
       break;
     case 2:
       $.get("html/vertical-scroll-overlay.html", function(data) {
@@ -150,15 +166,22 @@ function navigateDown() {
           $("#vertical-scroll-overlay").css("opacity", 0.9);
         }, 100);
       });
+
       index = 3;
       break;
     case 3:
-      $("#vertical-scroll-overlay").css("opacity", 0);
-      setTimeout(function() {
-        $("#vertical-scroll-overlay").css("display", "none");
-      }, 500);
+      if (!skip) {
+        $("#vertical-scroll-overlay").css("opacity", 0);
+        setTimeout(function() {
+          $("#vertical-scroll-overlay").css("display", "none");
+        }, 500);
+        skip = true;
+        index = 4;
+      } else {
+        index = 4;
+        navigateDown();
+      }
 
-      index = 4;
       break;
     case 4:
       activateSection($("#practice-content-container"), 0);
@@ -183,4 +206,52 @@ function navigateDown() {
   }
 }
 
-function navigateUp() {}
+function navigateUp() {
+  switch (index) {
+    case 1:
+      $("#impress-menu").removeClass("inactive");
+      $("#learn-menu").removeClass("inactive");
+      $("#practice-menu").removeClass("inactive");
+      index = 0;
+
+      break;
+    case 2:
+      activateSection($("#impress-content-container"), 0);
+      $("#impress-menu").removeClass("inactive");
+      index = 1;
+      break;
+    case 3:
+      $("#vertical-scroll-overlay").css("opacity", 0);
+      setTimeout(function() {
+        $("#vertical-scroll-overlay").css("display", "none");
+      }, 500);
+      index = 3;
+      break;
+    case 4:
+      skip = true;
+      index = 2;
+      navigateUp();
+      break;
+    case 5:
+      activateSection($("#impress-content-container"), 0);
+      $("#impress-menu").removeClass("inactive");
+      index = 2;
+      break;
+    case 6:
+      activateSection($("#practice-content-container"), 0);
+      $("#practice-menu").removeClass("inactive");
+      index = 5;
+      break;
+    case 7:
+      activateSection($("#practice-content-container"), 0);
+
+      $("#practice-menu").removeClass("inactive");
+      index = 6;
+      break;
+    case 8:
+      activateSection($("#learn-content-container"), 0);
+      $("#learn-menu").removeClass("inactive");
+      index = 7;
+      break;
+  }
+}
