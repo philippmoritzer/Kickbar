@@ -37,6 +37,11 @@
     width: 85%;
     margin: 0 auto;
   }
+
+  #scroll-overlay {
+    display: none;
+  }
+
   .scroll-overlay-fade-bottom {
     width: 100%;
     height: 20vh;

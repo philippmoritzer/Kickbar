@@ -29,11 +29,34 @@ function loadContent() {
   });
 }
 
+var trigger = false;
+
 $(document).ready(function() {
   $("#impress-menu").on("click", () => {
     activateSection($("#impress-content-container"), 0);
     $("#impress-menu").removeClass("inactive");
-    index = 3;
+    if (trigger) {
+      $("#vertical-scroll-overlay").css("opacity", 0);
+      setTimeout(function() {
+        $("#vertical-scroll-overlay").css("display", "none");
+      }, 500);
+      index = 3;
+    } else {
+      $.get("html/vertical-scroll-overlay.html", function(data) {
+        $("#main-container").append(data);
+        setTimeout(function() {
+          $("#vertical-scroll-overlay").css("opacity", 0.9);
+        }, 100);
+        $("#vertical-scroll-overlay").on("click", () => {
+          $("#vertical-scroll-overlay").css("opacity", 0);
+          setTimeout(function() {
+            $("#vertical-scroll-overlay").css("display", "none");
+          }, 500);
+          index = 3;
+        });
+      });
+    }
+    trigger = true;
   });
   $("#practice-menu").on("click", () => {
     activateSection($("#practice-content-container"), 1);
@@ -51,8 +74,9 @@ $(document).ready(function() {
 });
 
 function activateSection(element, index) {
+  removeAllActiveSections();
+
   if (activeState[index]) {
-    removeAllActiveSections();
     activeState[index] = false;
   } else {
     element.addClass("active");
@@ -87,6 +111,7 @@ function setActiveState(section) {
 $(document).ready(function() {
   var timerId;
   $(window).on("wheel", function(e) {
+    console.log("hello");
     var delta = e.originalEvent.deltaY;
     clearTimeout(timerId);
     timerId = setTimeout(function() {
@@ -105,11 +130,11 @@ $(document).ready(function() {
   var hammer = new Hammer.Manager(container, { touchAction: "auto" });
   var swipe = new Hammer.Swipe();
   hammer.add(swipe);
-  hammer.on("swipedown", function() {
-    navigateUp();
+  hammer.on("swipeleft", function() {
+    console.log("swipe left");
   });
-  hammer.on("swipeup", function() {
-    navigateDown();
+  hammer.on("swiperight", function() {
+    console.log("right swipe");
   });
 });
 
@@ -165,6 +190,13 @@ function navigateDown() {
         setTimeout(function() {
           $("#vertical-scroll-overlay").css("opacity", 0.9);
         }, 100);
+        $("#vertical-scroll-overlay").on("click", () => {
+          $("#vertical-scroll-overlay").css("opacity", 0);
+          setTimeout(function() {
+            $("#vertical-scroll-overlay").css("display", "none");
+          }, 500);
+          index = 3;
+        });
       });
 
       index = 3;

@@ -29,6 +29,10 @@
     width: 100%;
   }
 
+  #scroll-overlay {
+    display: none;
+  }
+
   section {
     -webkit-overflow-scrolling: touch;
   }

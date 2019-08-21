@@ -4,7 +4,16 @@ body {
   height: 100vh;
   overflow: hidden;
 }
-
+::-webkit-scrollbar {
+  width: 12px; /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+}
 #impress {
   transition: all 2s ease-in-out;
 }
@@ -80,7 +89,6 @@ section {
 }
 
 .impress-right-side {
-  text-align: justify;
 }
 
 #impress-slideable {
@@ -146,7 +154,6 @@ section {
 }
 
 .practice-left-side {
-  text-align: justify;
 }
 
 .section-head {
@@ -205,7 +212,6 @@ section {
   color: #bdbbac;
   margin-block-start: -0.1em;
   letter-spacing: 1px;
-  text-align: justify;
 }
 
 .small-header {

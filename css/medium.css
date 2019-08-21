@@ -29,4 +29,8 @@
   .section-container {
     overflow-y: scroll;
   }
+
+  #scroll-overlay {
+    display: none;
+  }
 }
