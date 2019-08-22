@@ -11,9 +11,10 @@ loadContent();
 
 function loadContent() {
   $(document).ready(function() {
-    $.get("html/impress.html", function(data) {
-      $impress_section.append(data);
+    $.get("html/impress/impress-1.html", function(data) {
+      $("#impress-content-container").append(data);
     });
+
     $.get("html/practice.html", function(data) {
       $practice_section.append(data);
     });
@@ -111,7 +112,6 @@ function setActiveState(section) {
 $(document).ready(function() {
   var timerId;
   $(window).on("wheel", function(e) {
-    console.log("hello");
     var delta = e.originalEvent.deltaY;
     clearTimeout(timerId);
     timerId = setTimeout(function() {
@@ -124,19 +124,64 @@ $(document).ready(function() {
   });
 });
 
+const impress_pages = [];
+
+for (let i = 1; i <= 5; i++) {
+  $.get("html/impress/impress-" + i + ".html", function(data) {
+    impress_pages[i] = data;
+  });
+}
+
+impress_index = 1;
 //swipe
 $(document).ready(function() {
-  var container = document.getElementById("main-container");
+  var container = document.getElementById("#impress-content-container");
   var hammer = new Hammer.Manager(container, { touchAction: "auto" });
   var swipe = new Hammer.Swipe();
   hammer.add(swipe);
   hammer.on("swipeleft", function() {
-    console.log("swipe left");
+    if (impress_index + 1 <= 5) {
+      navigateImpress(impress_index + 1);
+    }
   });
   hammer.on("swiperight", function() {
-    console.log("right swipe");
+    if (impress_index - 1 >= 1) {
+      navigateImpress(impress_index - 1);
+    }
   });
 });
+
+function navigateImpress(index) {
+  if (index >= 1 && index <= 5) {
+    if (index > impress_index) {
+      impress_index = index;
+      $("#impress-content-container").addClass("animated fadeOutLeft");
+
+      setTimeout(function() {
+        $("#impress-content-container")
+          .empty()
+          .append(impress_pages[impress_index]);
+        $("#impress-content-container").removeClass("fadeInLeft");
+        $("#impress-content-container").removeClass("fadeOutLeft");
+
+        $("#impress-content-container").addClass("fadeInRight");
+      }, 500);
+    } else {
+      impress_index = index;
+      $("#impress-content-container").addClass("animated fadeOutRight");
+
+      setTimeout(function() {
+        $("#impress-content-container")
+          .empty()
+          .append(impress_pages[impress_index]);
+        $("#impress-content-container").removeClass("fadeOutRight");
+        $("#impress-content-container").removeClass("fadeInRight");
+
+        $("#impress-content-container").addClass("fadeInLeft");
+      }, 500);
+    }
+  }
+}
 
 //swip impress container
 // $(document).ready(function() {

@@ -236,3 +236,18 @@ section {
   transform: translate(-50%, -50%);
   z-index: 999;
 }
+
+.has-slider {
+  overflow: hidden;
+  width: 100%;
+}
+
+.slider {
+  width: 300%;
+}
+
+.duration {
+  animation-duration: 0.5s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+}
