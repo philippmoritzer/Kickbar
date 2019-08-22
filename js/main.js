@@ -18,8 +18,8 @@ function loadContent() {
     $.get("html/practice.html", function(data) {
       $practice_section.append(data);
     });
-    $.get("html/learn.html", function(data) {
-      $learn_section.append(data);
+    $.get("html/learn/learn-1.html", function(data) {
+      $("#learn-content-container").append(data);
     });
     $.get("html/scroll-overlay.html", function(data) {
       $("#main-container").append(data);
@@ -135,7 +135,7 @@ for (let i = 1; i <= 5; i++) {
 impress_index = 1;
 //swipe
 $(document).ready(function() {
-  var container = document.getElementById("#impress-content-container");
+  var container = document.getElementById("impress-content-container");
   var hammer = new Hammer.Manager(container, { touchAction: "auto" });
   var swipe = new Hammer.Swipe();
   hammer.add(swipe);
