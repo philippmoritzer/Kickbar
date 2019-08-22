@@ -31,10 +31,20 @@ function loadContent() {
 }
 
 var trigger = false;
+var impress_open = false;
 
 $(document).ready(function() {
   $("#impress-menu").on("click", () => {
     activateSection($("#impress-content-container"), 0);
+    if (!impress_open) {
+      setTimeout(() => {
+        initNavigationOverlay();
+      }, 1000);
+    } else {
+      $("#main-container").remove("#image-navigation-overlay");
+    }
+
+    impress_open = !impress_open;
     $("#impress-menu").removeClass("inactive");
     if (trigger) {
       $("#vertical-scroll-overlay").css("opacity", 0);
@@ -136,7 +146,7 @@ impress_index = 1;
 //swipe
 $(document).ready(function() {
   var container = document.getElementById("impress-content-container");
-  var hammer = new Hammer.Manager(container, { touchAction: "auto" });
+  var hammer = new Hammer.Manager(container, { touchAction: "pan-y" });
   var swipe = new Hammer.Swipe();
   hammer.add(swipe);
   hammer.on("swipeleft", function() {
@@ -152,9 +162,10 @@ $(document).ready(function() {
 });
 
 function navigateImpress(index) {
-  if (index >= 1 && index <= 5) {
+  if (index >= 1 && index <= 5 && index !== impress_index) {
     if (index > impress_index) {
       impress_index = index;
+
       $("#impress-content-container").addClass("animated fadeOutLeft");
 
       setTimeout(function() {
@@ -283,6 +294,13 @@ function navigateDown() {
   }
 }
 
+$(window).resize(function() {
+  $("#image-navigation-overlay").remove();
+  if (impress_open) {
+    initNavigationOverlay();
+  }
+});
+
 function navigateUp() {
   switch (index) {
     case 1:
@@ -331,4 +349,54 @@ function navigateUp() {
       index = 7;
       break;
   }
+}
+
+function initNavigationOverlay() {
+  $(document).ready(function() {
+    var width = $("#impress-navigation-slide").width();
+    var height = $("#impress-navigation-slide").height();
+
+    var offset = $("#impress-navigation-slide").offset();
+    var top = offset.top;
+    var left = offset.left;
+
+    $("#main-container").append(
+      "<div id='image-navigation-overlay' class='image-navigation-overlay' style='top:" +
+        top +
+        "px; left: " +
+        left +
+        "px; width: " +
+        width +
+        "px; height:" +
+        height +
+        "px; '><div id='impress-navigation-1' style='width:" +
+        width / 5 +
+        "px;'></div><div id='impress-navigation-2' style='width:" +
+        width / 5 +
+        "px;'></div><div id='impress-navigation-3' style='width:" +
+        width / 5 +
+        "px;'></div><div id='impress-navigation-4' style='width:" +
+        width / 5 +
+        "px;'></div><div id='impress-navigation-5' style='width:" +
+        width / 5 +
+        "px;'></div>" +
+        "</div>"
+    );
+
+    $("#impress-navigation-1").on("click", () => {
+      navigateImpress(1);
+    });
+    $("#impress-navigation-2").on("click", () => {
+      navigateImpress(2);
+    });
+    $("#impress-navigation-3").on("click", () => {
+      navigateImpress(3);
+    });
+    $("#impress-navigation-4").on("click", () => {
+      navigateImpress(4);
+    });
+    $("#impress-navigation-5").on("click", () => {
+      navigateImpress(5);
+    });
+  });
 }

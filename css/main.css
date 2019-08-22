@@ -88,17 +88,6 @@ section {
   transition: all 0.5s ease;
 }
 
-.impress-right-side {
-}
-
-#impress-slideable {
-  display: flex;
-  flex-direction: row;
-}
-
-.impress-left-side {
-}
-
 .impress-description-text {
   font-family: "FiraSans-Book";
   color: #bdbbac;
@@ -151,9 +140,6 @@ section {
   display: flex;
   flex-direction: row;
   margin-top: 1.5em;
-}
-
-.practice-left-side {
 }
 
 .section-head {
@@ -250,4 +236,16 @@ section {
   animation-duration: 0.5s;
   animation-delay: 0s;
   animation-iteration-count: 1;
+}
+
+.image-navigation-overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.image-navigation-item {
+  height: 100%;
 }

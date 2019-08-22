@@ -33,4 +33,8 @@
   #scroll-overlay {
     display: none;
   }
+
+  .impress-trick-header {
+    margin-left: 7.5%;
+  }
 }

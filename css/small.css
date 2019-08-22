@@ -1,10 +1,6 @@
 /* Small devices (tablets, 768px and up) */
 /* Test device - iPad */
 @media (min-width: 768px) and (max-width: 991px) {
-  html,
-  body {
-  }
-
   .section-wrapper {
     width: 75%;
     height: auto;
@@ -39,5 +35,8 @@
 
   .section-container {
     overflow-y: scroll;
+  }
+  .impress-trick-header {
+    margin-left: 7.5%;
   }
 }
