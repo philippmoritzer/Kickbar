@@ -139,6 +139,17 @@ section {
   margin-bottom: 1.5em;
 }
 
+.learn-image {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.learn-move-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.5em;
+}
+
 .practice-flex {
   display: flex;
   flex-direction: row;
@@ -213,8 +224,8 @@ section {
 }
 
 .split-image {
-  max-height: 50%;
   max-width: 50%;
+  height: auto;
 }
 
 .scroll-overlay-button {
