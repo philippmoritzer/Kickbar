@@ -48,8 +48,4 @@
   .scroll-overlay-fade-bottom {
     height: 10vh;
   }
-
-  .section-container {
-    overflow-y: scroll;
-  }
 }

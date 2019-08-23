@@ -3,6 +3,8 @@
 //activeState[2] = learn
 const activeState = [false, false, false];
 
+var simpleBar = null;
+
 var $impress_section = $("#impress");
 var $practice_section = $("#practice");
 var $learn_section = $("#learn");
@@ -21,30 +23,41 @@ function loadContent() {
     $.get("html/learn/learn-1.html", function(data) {
       $("#learn-content-container").append(data);
     });
-    $.get("html/scroll-overlay.html", function(data) {
-      $("#main-container").append(data);
-      setTimeout(function() {
-        $("#scroll-overlay").css("opacity", 0.9);
-      }, 100);
-    });
+    // $.get("html/scroll-overlay.html", function(data) {
+    //   $("#main-container").append(data);
+    //   setTimeout(function() {
+    //     $("#scroll-overlay").css("opacity", 0.9);
+    //   }, 100);
+    // });
   });
 }
 
 var trigger = false;
 var impress_open = false;
+var learn_open = false;
 
 $(document).ready(function() {
   $("#impress-menu").on("click", () => {
     activateSection($("#impress-content-container"), 0);
+    learn_open = false;
     if (!impress_open) {
+      impress_open = true;
       setTimeout(() => {
         initNavigationOverlay();
+        if (simpleBar) {
+          simpleBar.recalculate();
+        } else {
+          console.log("yes");
+          simpleBar = new SimpleBar(
+            document.getElementById("impress-content-container")
+          );
+        }
       }, 1000);
     } else {
-      $("#main-container").remove("#image-navigation-overlay");
+      impress_open = false;
+      $("#image-navigation-overlay").remove();
     }
 
-    impress_open = !impress_open;
     $("#impress-menu").removeClass("inactive");
     if (trigger) {
       $("#vertical-scroll-overlay").css("opacity", 0);
@@ -70,12 +83,27 @@ $(document).ready(function() {
     trigger = true;
   });
   $("#practice-menu").on("click", () => {
+    $("#image-navigation-overlay").remove();
+    impress_open = false;
+    learn_open = false;
     activateSection($("#practice-content-container"), 1);
+
     $("#practice-menu").removeClass("inactive");
     index = 7;
   });
   $("#learn-menu").on("click", () => {
+    $("#image-navigation-overlay").remove();
+    impress_open = false;
     activateSection($("#learn-content-container"), 2);
+    if (!learn_open) {
+      learn_open = true;
+      setTimeout(() => {
+        initLearnNavigationOverlay();
+      }, 1000);
+    } else {
+      learn_open = false;
+      $("#image-navigation-overlay").remove();
+    }
     $("#learn-menu").removeClass("inactive");
     index = 8;
   });
@@ -119,7 +147,7 @@ function setActiveState(section) {
   activeState[section] = true;
 }
 
-$(document).ready(function() {
+/*$(document).ready(function() {
   var timerId;
   $(window).on("wheel", function(e) {
     var delta = e.originalEvent.deltaY;
@@ -132,7 +160,7 @@ $(document).ready(function() {
       }
     }, 200);
   });
-});
+});*/
 
 const impress_pages = [];
 
@@ -166,7 +194,7 @@ function navigateImpress(index) {
     if (index > impress_index) {
       impress_index = index;
 
-      $("#impress-content-container").addClass("animated fadeOutLeft");
+      $("#impress-content-container").addClass("animated duration fadeOutLeft");
 
       setTimeout(function() {
         $("#impress-content-container")
@@ -176,7 +204,7 @@ function navigateImpress(index) {
         $("#impress-content-container").removeClass("fadeOutLeft");
 
         $("#impress-content-container").addClass("fadeInRight");
-      }, 500);
+      }, 330);
     } else {
       impress_index = index;
       $("#impress-content-container").addClass("animated fadeOutRight");
@@ -189,26 +217,71 @@ function navigateImpress(index) {
         $("#impress-content-container").removeClass("fadeInRight");
 
         $("#impress-content-container").addClass("fadeInLeft");
-      }, 500);
+        new SimpleBar(document.getElementById("impress-content-container"));
+      }, 330);
     }
   }
 }
 
-//swip impress container
-// $(document).ready(function() {
-//   var container = document.getElementById("main-container");
-//   var hammer = new Hammer.Manager(container, { touchAction: "auto" });
-//   var swipe = new Hammer.Swipe();
-//   hammer.add(swipe);
+for (let i = 1; i <= 5; i++) {
+  $.get("html/learn/learn-" + i + ".html", function(data) {
+    learn_pages[i] = data;
+  });
+}
 
-//   hammer.on("", function() {
-//     navigateUp();
-//   });
-//   hammer.on("swipeup", function() {
-//     console.log("yup");
-//     navigateDown();
-//   });
-// });
+const learn_pages = [];
+
+learn_index = 1;
+
+$(document).ready(function() {
+  var container = document.getElementById("learn-content-container");
+  var hammer = new Hammer.Manager(container, { touchAction: "pan-y" });
+  var swipe = new Hammer.Swipe();
+  hammer.add(swipe);
+  hammer.on("swipeleft", function() {
+    if (learn_index + 1 <= 5) {
+      navigateLearn(learn_index + 1);
+    }
+  });
+  hammer.on("swiperight", function() {
+    if (learn_index - 1 >= 1) {
+      navigateLearn(learn_index - 1);
+    }
+  });
+});
+
+function navigateLearn(index) {
+  if (index >= 1 && index <= 5 && index !== learn_index) {
+    if (index > learn_index) {
+      learn_index = index;
+
+      $("#learn-content-container").addClass("animated duration fadeOutLeft");
+
+      setTimeout(function() {
+        $("#learn-content-container")
+          .empty()
+          .append(learn_pages[learn_index]);
+        $("#learn-content-container").removeClass("fadeInLeft");
+        $("#learn-content-container").removeClass("fadeOutLeft");
+
+        $("#learn-content-container").addClass("fadeInRight");
+      }, 330);
+    } else {
+      learn_index = index;
+      $("#learn-content-container").addClass("animated fadeOutRight");
+
+      setTimeout(function() {
+        $("#learn-content-container")
+          .empty()
+          .append(learn_pages[learn_index]);
+        $("#learn-content-container").removeClass("fadeOutRight");
+        $("#learn-content-container").removeClass("fadeInRight");
+
+        $("#learn-content-container").addClass("fadeInLeft");
+      }, 330);
+    }
+  }
+}
 
 var index = 0;
 var skip = false;
@@ -385,18 +458,73 @@ function initNavigationOverlay() {
 
     $("#impress-navigation-1").on("click", () => {
       navigateImpress(1);
+      simpleBar.recalculate();
     });
     $("#impress-navigation-2").on("click", () => {
       navigateImpress(2);
+      simpleBar.recalculate();
     });
     $("#impress-navigation-3").on("click", () => {
       navigateImpress(3);
+      simpleBar.recalculate();
     });
     $("#impress-navigation-4").on("click", () => {
       navigateImpress(4);
+      simpleBar.recalculate();
     });
     $("#impress-navigation-5").on("click", () => {
       navigateImpress(5);
+      simpleBar.recalculate();
+    });
+  });
+}
+
+function initLearnNavigationOverlay() {
+  $(document).ready(function() {
+    var width = $("#learn-navigation-slide").width();
+    var height = $("#learn-navigation-slide").height();
+
+    var offset = $("#learn-navigation-slide").offset();
+    var top = offset.top;
+    var left = offset.left;
+
+    $("#main-container").append(
+      "<div id='image-navigation-overlay' class='image-navigation-overlay' style='top:" +
+        top +
+        "px; left: " +
+        left +
+        "px; width: " +
+        width +
+        "px; height:" +
+        height +
+        "px; '><div id='learn-navigation-1' style='width:" +
+        width / 5 +
+        "px;'></div><div id='learn-navigation-2' style='width:" +
+        width / 5 +
+        "px;'></div><div id='learn-navigation-3' style='width:" +
+        width / 5 +
+        "px;'></div><div id='learn-navigation-4' style='width:" +
+        width / 5 +
+        "px;'></div><div id='learn-navigation-5' style='width:" +
+        width / 5 +
+        "px;'></div>" +
+        "</div>"
+    );
+
+    $("#learn-navigation-1").on("click", () => {
+      navigateLearn(1);
+    });
+    $("#learn-navigation-2").on("click", () => {
+      navigateLearn(2);
+    });
+    $("#learn-navigation-3").on("click", () => {
+      navigateLearn(3);
+    });
+    $("#learn-navigation-4").on("click", () => {
+      navigateLearn(4);
+    });
+    $("#learn-navigation-5").on("click", () => {
+      navigateLearn(5);
     });
   });
 }
