@@ -112,6 +112,24 @@ $(document).ready(function() {
   });
 });
 
+function onLearnClicked() {
+  activateSection($("#practice-content-container"), 1);
+  $("#image-navigation-overlay").remove();
+  impress_open = false;
+  activateSection($("#learn-content-container"), 2);
+  if (!learn_open) {
+    learn_open = true;
+    setTimeout(() => {
+      initLearnNavigationOverlay();
+    }, 1000);
+  } else {
+    learn_open = false;
+    $("#image-navigation-overlay").remove();
+  }
+  $("#learn-menu").removeClass("inactive");
+  index = 8;
+}
+
 function activateSection(element, index) {
   removeAllActiveSections();
 
